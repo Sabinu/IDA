@@ -1,6 +1,14 @@
 [
 	{
-		"command": "importall",
-		"caption": "IDA - Import All"
+		// "id": "000",
+		"caption": "IDA",
+		"children":
+		[
+		{
+
+			"command": "idaimportall",
+			"caption": "Import All"
+		}
+		]
 	}
 ]

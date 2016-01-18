@@ -3,7 +3,7 @@ import sublime_plugin
 import sys
 
 
-class ImportallCommand(sublime_plugin.WindowCommand):
+class IdaimportallCommand(sublime_plugin.WindowCommand):
     def run(self):
         project_info = self.window.extract_variables()
         items = ['platform', 'project_name', 'project_path']
