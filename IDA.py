@@ -1,34 +1,18 @@
 import sublime
 import sublime_plugin
-import sys
 
 
-class IdaimportallCommand(sublime_plugin.WindowCommand):
-    def run(self):
+class IDACommand(sublime_plugin.WindowCommand):
+    def get_project_info(self):
         project_info = self.window.extract_variables()
-        items = ['platform', 'project_name', 'project_path']
+        self.platform = project_info['platform']
+        self.project_name = project_info['project_name']
+        self.project_path = project_info['project_path']
+
+
+class IdaimportallCommand(IDACommand):
+    def run(self):
+        self.get_project_info()
         print(60 * '=')
-        for item in items:
-            print('{:<15}: {}'.format(item, project_info[item]))
-        print(sys.version)
+        print(self.platform)
         print(60 * '=')
-
-
-# ==========================================================
-
-# Extends TextCommand so that run() receives a View to modify.
-# class DuplicateCommand(sublime_plugin.TextCommand):
-#     def run(self, view, *args):
-#         print(sys.version)
-#         # Walk through each region in the selection
-        # for region in view.selection():
-              # Only interested in empty regions
-              # otherwise they may span multiple
-#             # lines, which doesn't make sense for this command.
-#             if region.empty():
-                 # Expand the region to the full line it resides on, excluding the newline
-#                 line = view.line(region)
-#                 # Extract the string for the line, and add a newline
-#                 lineContents = view.substr(line) + '\n'
-#                 # Add the text at the beginning of the line
-#                 view.insert(line.begin(), lineContents)
