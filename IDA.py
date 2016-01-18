@@ -10,9 +10,39 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.project_path = project_info['project_path']
 
 
-class IdaimportallCommand(IDACommand):
+class IdanewobjectCommand(IDACommand):
+    def run(self):
+        print('Not implemented')
+
+
+class IdacurrentmakeCommand(IDACommand):
+    def run(self):
+        print('Not implemented')
+
+
+class IdacurrentimportCommand(IDACommand):
+    def run(self):
+        print('Not implemented')
+
+
+class IdaallmakeCommand(IDACommand):
+    def run(self):
+        print('Not implemented')
+
+
+class IdaallimportCommand(IDACommand):
     def run(self):
         self.get_project_info()
         print(60 * '=')
         print(self.platform)
         print(60 * '=')
+
+
+class IdalibrarymakeCommand(IDACommand):
+    def run(self):
+        print('Not implemented')
+
+
+class IdalibraryunpackCommand(IDACommand):
+    def run(self):
+        print('Not implemented')
