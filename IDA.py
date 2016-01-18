@@ -2,9 +2,14 @@ import sublime
 import sublime_plugin
 
 
-class ExampleCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-        self.view.insert(edit, 0, "Hello from IDA")
+class ImportallCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        project_info = self.window.extract_variables()
+        items = ['platform', 'project_name', 'project_path']
+        print(60 * '=')
+        for item in items:
+            print('{:<15}: {}'.format(item, project_info[item]))
+        print(60 * '=')
 
 
 # ==========================================================

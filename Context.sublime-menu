@@ -1,6 +1,6 @@
 [
 	{
-		"command": "example",
-		"caption": "IDA - Here"
+		"command": "importall",
+		"caption": "IDA - Import All"
 	}
 ]
