@@ -1,5 +1,6 @@
 import sublime
 import sublime_plugin
+import sys
 
 
 class ImportallCommand(sublime_plugin.WindowCommand):
@@ -9,6 +10,7 @@ class ImportallCommand(sublime_plugin.WindowCommand):
         print(60 * '=')
         for item in items:
             print('{:<15}: {}'.format(item, project_info[item]))
+        print(sys.version)
         print(60 * '=')
 
 
