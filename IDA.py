@@ -1,6 +1,13 @@
 import sublime
 import sublime_plugin
 
+import os.path
+import filecmp
+import shutil
+import time
+
+from subprocess import call
+
 
 class IDACommand(sublime_plugin.WindowCommand):
     def get_project_info(self):
@@ -44,6 +51,11 @@ class IdaallimportCommand(IDACommand):
         print(self.project_name)
         print(self.project_path)
         print(self.location)
+        print(60 * '=')
+        # call(['mkdir', '/Users/sabinu/blipy'])
+        # call(["pwd"])
+        # call(["ls", "-l"])
+        # call('dir', 'c:\\')
         print(60 * '=')
 
 
