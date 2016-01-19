@@ -22,12 +22,12 @@
 		{
 
 			"command": "idaallmake",
-			"caption": "All -Make"
+			"caption": "All - Make"
 		},
 		{
 
 			"command": "idaallimport",
-			"caption": "All -Import"
+			"caption": "All - Import"
 		},
 		{
 
