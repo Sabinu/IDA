@@ -5,37 +5,30 @@
 		"children":
 		[
 		{
-
 			"command": "idanewobject",
 			"caption": "New Object"
 		},
 		{
-
 			"command": "idacurrentmake",
 			"caption": "Current - Make"
 		},
 		{
-
 			"command": "idacurrentimport",
 			"caption": "Current - Import"
 		},
 		{
-
 			"command": "idaallmake",
 			"caption": "All - Make"
 		},
 		{
-
 			"command": "idaallimport",
 			"caption": "All - Import"
 		},
 		{
-
 			"command": "idalibrarymake",
 			"caption": "Library - Make"
 		},
 		{
-
 			"command": "idalibraryunpack",
 			"caption": "Library - Un-pack"
 		}
