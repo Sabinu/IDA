@@ -1,38 +1,42 @@
 [
-	{"caption": "-"},
+	{
+		"caption": "-"
+	},
 	{
 		"caption": "IDA",
 		"children":
 		[
 		{
-			"command": "idanewobject",
+			"command": "ida_new_object",
 			"caption": "New Object"
 		},
 		{
-			"command": "idacurrentmake",
+			"command": "ida_current_make",
 			"caption": "Current - Make"
 		},
 		{
-			"command": "idacurrentimport",
+			"command": "ida_current_import",
 			"caption": "Current - Import"
 		},
 		{
-			"command": "idaallmake",
+			"command": "ida_all_make",
 			"caption": "All - Make"
 		},
 		{
-			"command": "idaallimport",
+			"command": "ida_all_import",
 			"caption": "All - Import"
 		},
 		{
-			"command": "idalibrarymake",
+			"command": "ida_library_make",
 			"caption": "Library - Make"
 		},
 		{
-			"command": "idalibraryunpack",
+			"command": "ida_library_unpack",
 			"caption": "Library - Un-pack"
 		}
 		]
 	},
-	{"caption": "-", "id": "end"}	
+	{
+		"caption": "-", "id": "end"
+	}
 ]

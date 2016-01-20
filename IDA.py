@@ -20,27 +20,27 @@ class IDACommand(sublime_plugin.WindowCommand):
             # print('{:<25}: {}'.format(k, v))
 
 
-class IdanewobjectCommand(IDACommand):
+class IdaNewObjectCommand(IDACommand):
     def run(self):
         sublime.error_message('Function not yet implemented.')
 
 
-class IdacurrentmakeCommand(IDACommand):
+class IdaCurrentMakeCommand(IDACommand):
     def run(self):
         sublime.error_message('Function not yet implemented.')
 
 
-class IdacurrentimportCommand(IDACommand):
+class IdaCurrentImportCommand(IDACommand):
     def run(self):
         sublime.error_message('Function not yet implemented.')
 
 
-class IdaallmakeCommand(IDACommand):
+class IdaAllMakeCommand(IDACommand):
     def run(self):
         sublime.error_message('Function not yet implemented.')
 
 
-class IdaallimportCommand(IDACommand):
+class IdaAllImportCommand(IDACommand):
     def run(self):
         self.get_project_info()
         if self.project_name is None:
@@ -59,11 +59,11 @@ class IdaallimportCommand(IDACommand):
         print(60 * '=')
 
 
-class IdalibrarymakeCommand(IDACommand):
+class IdaLibraryMakeCommand(IDACommand):
     def run(self):
         sublime.error_message('Function not yet implemented.')
 
 
-class IdalibraryunpackCommand(IDACommand):
+class IdaLibraryUnpackCommand(IDACommand):
     def run(self):
         sublime.error_message('Function not yet implemented.')
