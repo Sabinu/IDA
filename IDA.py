@@ -10,7 +10,8 @@ from subprocess import call
 
 
 class IDACommand(sublime_plugin.WindowCommand):
-    def get_project_info(self):
+    def __init__(self, *args):
+        super().__init__(*args)
         project_info = self.window.extract_variables()
         self.platform = project_info.get('platform', None)
         self.project_path = project_info.get('project_path', None)
@@ -18,7 +19,7 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.location = project_info.get('file_path', None)
         # for k, v in project_info.items():
             # print('{:<25}: {}'.format(k, v))
-
+        
 
 class IdaNewObjectCommand(IDACommand):
     def run(self):
@@ -42,9 +43,8 @@ class IdaAllMakeCommand(IDACommand):
 
 class IdaAllImportCommand(IDACommand):
     def run(self):
-        self.get_project_info()
         if self.project_name is None:
-            sublime.error_message('\nYou are not in a Project\nPlease work inside a project.')
+            sublime.error_message('You are not in a Project\nPlease work inside a project.')
             return
         print(60 * '=')
         print(self.platform)

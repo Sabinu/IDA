@@ -1,0 +1,42 @@
+[
+	{
+		"caption": "-"
+	},
+	{
+		"caption": "IDA",
+		"children":
+		[
+		{
+			"command": "ida_new_object",
+			"caption": "New Object"
+		},
+		{
+			"command": "ida_current_make",
+			"caption": "Current - Make"
+		},
+		{
+			"command": "ida_current_import",
+			"caption": "Current - Import"
+		},
+		{
+			"command": "ida_all_make",
+			"caption": "All - Make"
+		},
+		{
+			"command": "ida_all_import",
+			"caption": "All - Import"
+		},
+		{
+			"command": "ida_library_make",
+			"caption": "Library - Make"
+		},
+		{
+			"command": "ida_library_unpack",
+			"caption": "Library - Un-pack"
+		}
+		]
+	},
+	{
+		"caption": "-", "id": "end"
+	}
+]
