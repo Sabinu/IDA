@@ -5,7 +5,6 @@ import os.path
 import filecmp
 import shutil
 import time
-
 from subprocess import call
 
 
@@ -17,6 +16,25 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.project_path = self.project_info.get('project_path', None)
         self.project_name = self.project_info.get('project_base_name', None)
         self.current_object = self.project_info.get('file_path', None)
+
+    def get_lp_xml(self):
+        self.lp_xml_converter = self.window.project_data()["LP_XML_Converter"]
+        if self.lp_xml_converter is None:
+            self.window.show_input_panel('Archicad Version:', '19', self.done_lp_xml, self.change_lp_xml, self.cancel_lp_xml)
+        return self.lp_xml_converter
+
+    def done_lp_xml(self, ac_version):
+        print('Got: {}'.format(ac_version))
+
+    def change_lp_xml(self, ac_version):
+        print('Changed: {}'.format(ac_version))
+
+    def cancel_lp_xml(self, ac_version):
+        print('Changed: {}'.format(ac_version))
+
+    def list_lp_xml(self):
+        print(self.window.project_data())
+        print('LP_XML_Converter: {}'.format(self.get_lp_xml()))
 
     def list_project_info(self):
         for k, v in self.project_info.items():
@@ -59,8 +77,8 @@ class IdaAllImportCommand(IDACommand):
             sublime.error_message('You are not in a Project\nPlease work inside a project.')
             return
         print(60 * '=')
-        print(self.window.project_data()["LP_XML_Converter"])
-        self.list_project_info()
+        self.list_lp_xml()
+        # self.list_project_info()
         self.list_gsm_objects()
         print(60 * '=')
         print(self.platform)
@@ -72,7 +90,7 @@ class IdaAllImportCommand(IDACommand):
         # call(["pwd"])
         # call(["ls", "-l"])
         # call('dir', 'c:\\')
-        print(60 * '=')
+        # print(60 * '=')
 
 
 class IdaLibraryMakeCommand(IDACommand):
