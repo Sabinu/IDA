@@ -18,11 +18,13 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.current_object = self.project_info.get('file_path', None)
 
     def get_lp_xml(self):
+        print(self.platform)
         self.lp_xml_converter = self.window.project_data()["LP_XML_Converter"][self.platform]
         if self.lp_xml_converter is None:
             self.window.show_input_panel('Archicad Version:', '19', self.done_lp_xml, self.change_lp_xml, self.cancel_lp_xml)
         return self.lp_xml_converter
 
+    # ======================================================
     def done_lp_xml(self, ac_version):
         print('Got: {}'.format(ac_version))
 
@@ -31,6 +33,7 @@ class IDACommand(sublime_plugin.WindowCommand):
 
     def cancel_lp_xml(self):
         print('LP_XML_Converter was not given.')
+    # ======================================================
 
     def list_lp_xml(self):
         print(self.window.project_data())
