@@ -12,14 +12,26 @@ from subprocess import call
 class IDACommand(sublime_plugin.WindowCommand):
     def __init__(self, *args):
         super().__init__(*args)
-        project_info = self.window.extract_variables()
-        self.platform = project_info.get('platform', None)
-        self.project_path = project_info.get('project_path', None)
-        self.project_name = project_info.get('project_base_name', None)
-        self.location = project_info.get('file_path', None)
-        # for k, v in project_info.items():
-            # print('{:<25}: {}'.format(k, v))
-        
+        self.project_info = self.window.extract_variables()
+        self.platform = self.project_info.get('platform', None)
+        self.project_path = self.project_info.get('project_path', None)
+        self.project_name = self.project_info.get('project_base_name', None)
+        self.current_object = self.project_info.get('file_path', None)
+
+    def list_project_info(self):
+        for k, v in self.project_info.items():
+            print('{:<25}: {}'.format(k, v))
+
+    def list_gsm_objects(self):
+        path_library_gsm = self.project_path + '/library_gsm'
+        # self.gsm_objects = os.listdir(path_library_gsm)
+        self.gsm_objects = os.walk(path_library_gsm)
+        for i, v in enumerate(self.gsm_objects):
+            print('{:>3}: {}'.format(i, v))
+
+    def get_object(self):
+        pass
+
 
 class IdaNewObjectCommand(IDACommand):
     def run(self):
@@ -47,10 +59,14 @@ class IdaAllImportCommand(IDACommand):
             sublime.error_message('You are not in a Project\nPlease work inside a project.')
             return
         print(60 * '=')
+        print(self.window.project_data()["LP_XML_Converter"])
+        self.list_project_info()
+        self.list_gsm_objects()
+        print(60 * '=')
         print(self.platform)
         print(self.project_name)
         print(self.project_path)
-        print(self.location)
+        print(self.current_object)
         print(60 * '=')
         # call(['mkdir', '/Users/sabinu/blipy'])
         # call(["pwd"])
