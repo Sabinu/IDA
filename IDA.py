@@ -29,8 +29,8 @@ class IDACommand(sublime_plugin.WindowCommand):
     def change_lp_xml(self, ac_version):
         print('Changed: {}'.format(ac_version))
 
-    def cancel_lp_xml(self, ac_version):
-        print('Changed: {}'.format(ac_version))
+    def cancel_lp_xml(self):
+        print('LP_XML_Converter was not given.')
 
     def list_lp_xml(self):
         print(self.window.project_data())
