@@ -19,7 +19,7 @@ class IDACommand(sublime_plugin.WindowCommand):
 
     def get_lp_xml(self):
         print(self.platform)
-        self.lp_xml_converter = self.window.project_data()["LP_XML_Converter"][self.platform]
+        self.lp_xml_converter = self.window.project_data()["LP_XML_Converter"]
         if self.lp_xml_converter is None:
             self.window.show_input_panel('Archicad Version:', '19', self.done_lp_xml, self.change_lp_xml, self.cancel_lp_xml)
         return self.lp_xml_converter
@@ -79,7 +79,7 @@ class IdaAllImportCommand(IDACommand):
         if self.project_name is None:
             sublime.error_message('You are not in a Project\nPlease work inside a project.')
             return
-        print(60 * '=')
+        print(60 * 'v')
         self.list_lp_xml()
         # self.list_project_info()
         self.list_gsm_objects()
@@ -88,7 +88,7 @@ class IdaAllImportCommand(IDACommand):
         print(self.project_name)
         print(self.project_path)
         print(self.current_object)
-        print(60 * '=')
+        print(60 * '^')
         # call(['mkdir', '/Users/sabinu/blipy'])
         # call(["pwd"])
         # call(["ls", "-l"])
