@@ -1,6 +1,7 @@
 {
-	"time": false,
-	"time_format": "%A %b %d %H:%M:%S %Y",
-	"time_locale": null,
-	"help": 5
+    "LP_XML_Converter":
+    {
+        "OSX": "/Applications/Graphisoft/Archicad 19/Archicad 19.app/Contents/MacOS/LP_XMLConverter.app/Contents/MacOS/LP_XMLConverter",
+        "Windows": "C:/Program Files/Graphisoft/ArchiCAD 19/LP_XMLConverter.exe"
+    }
 }
