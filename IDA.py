@@ -59,7 +59,6 @@ class IDACommand(sublime_plugin.WindowCommand):
                        self.project_path + '/library_gsm',
                        self.project_path + '/library_xml'], stdout=PIPE)
             output = p.communicate()[0]
-            print(output)
             output = output.decode("utf-8")[:-2]
             output = output.replace('\r', '')
             print(output)
