@@ -5,7 +5,7 @@ import os.path
 import filecmp
 import shutil
 import time
-from subprocess import call
+from subprocess import Popen, PIPE
 
 
 class IDACommand(sublime_plugin.WindowCommand):
@@ -49,6 +49,18 @@ class IDACommand(sublime_plugin.WindowCommand):
         for i, v in enumerate(self.gsm_objects):
             print('{:>3}: {}'.format(i, v))
 
+    def import_all(self):
+        if os.path.isfile(self.lp_xml_converter):
+            output = None
+            p = Popen([self.lp_xml_converter,
+                       'l2x',
+                       '-img',
+                       self.project_path + '/bitmaps',
+                       self.project_path + '/library_gsm',
+                       self.project_path + '/library_xml'], stdout=PIPE)
+            output = p.communicate()[0]
+            print(output.decode("utf-8")[:-2])
+
     def get_object(self):
         pass
 
@@ -86,13 +98,7 @@ class IdaAllImportCommand(IDACommand):
         print(self.project_path)
         print(self.current_object)
         print(60 * '=')
-        if os.path.isfile(self.lp_xml_converter):
-            call([self.lp_xml_converter,
-                  'l2x',
-                  '-img',
-                  self.project_path + '/bitmaps',
-                  self.project_path + '/library_gsm',
-                  self.project_path + '/library_xml'])
+        self.import_all()
         print(60 * '+')
         # call(['mkdir', '/Users/sabinu/blipy'])
         # call('dir', 'c:\\')
