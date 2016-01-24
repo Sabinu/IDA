@@ -86,7 +86,11 @@ class IdaAllImportCommand(IDACommand):
         print(self.project_path)
         print(self.current_object)
         print(60 * '=')
-        call(self.lp_xml_converter)
+        if os.path.isfile(self.lp_xml_converter):
+            call('{} libpart2xml -img {} {} {}'.format(self.lp_xml_converter,
+                                                       self.project_path + '/bitmaps',
+                                                       self.project_path + '/library_gsm',
+                                                       self.project_path + '/library_xml'))
         print(60 * '+')
         # call(['mkdir', '/Users/sabinu/blipy'])
         # call(["pwd"])
