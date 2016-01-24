@@ -59,9 +59,10 @@ class IDACommand(sublime_plugin.WindowCommand):
                        self.project_path + '/library_gsm',
                        self.project_path + '/library_xml'], stdout=PIPE)
             output = p.communicate()[0]
-            output.replate('\r', '')
             print(output)
-            print(output.decode("utf-8")[:-2])
+            output = output.decode("utf-8")[:-2]
+            output = output.replace('\r', '')
+            print(output)
 
     def get_object(self):
         pass
