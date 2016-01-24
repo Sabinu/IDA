@@ -61,6 +61,22 @@ class IDACommand(sublime_plugin.WindowCommand):
             output = p.communicate()[0]
             output = output.decode("utf-8")[:-2]
             output = output.replace('\r', '')
+            print("Importing all objects from library.")
+            print(output)
+
+    def make_all(self):
+        if os.path.isfile(self.lp_xml_converter):
+            output = None
+            p = Popen([self.lp_xml_converter,
+                       'x2l',
+                       '-img',
+                       self.project_path + '/bitmaps',
+                       self.project_path + '/library_xml',
+                       self.project_path + '/library_gsm'], stdout=PIPE)
+            output = p.communicate()[0]
+            output = output.decode("utf-8")[:-2]
+            output = output.replace('\r', '')
+            print("Making all objects from library.")
             print(output)
 
     def get_object(self):
@@ -84,7 +100,19 @@ class IdaCurrentImportCommand(IDACommand):
 
 class IdaAllMakeCommand(IDACommand):
     def run(self):
-        sublime.error_message('Function not yet implemented.')
+        if self.project_name is None:
+            sublime.error_message('You are not in a Project\nPlease work inside a project.')
+            return
+        print(60 * '+')
+        self.list_gsm_objects()
+        print(60 * '=')
+        print(self.platform)
+        print(self.project_name)
+        print(self.project_path)
+        print(self.current_object)
+        print(60 * '=')
+        self.make_all()
+        print(60 * '+')
 
 
 class IdaAllImportCommand(IDACommand):
@@ -102,9 +130,6 @@ class IdaAllImportCommand(IDACommand):
         print(60 * '=')
         self.import_all()
         print(60 * '+')
-        # call(['mkdir', '/Users/sabinu/blipy'])
-        # call('dir', 'c:\\')
-        # print(60 * '=')
 
 
 class IdaLibraryMakeCommand(IDACommand):
