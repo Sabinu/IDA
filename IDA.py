@@ -6,6 +6,7 @@ import filecmp
 import shutil
 import time
 from subprocess import Popen, PIPE
+import xml.etree.ElementTree as ET
 
 
 class IDACommand(sublime_plugin.WindowCommand):
@@ -42,12 +43,22 @@ class IDACommand(sublime_plugin.WindowCommand):
         for k, v in self.project_info.items():
             print('{:<25}: {}'.format(k, v))
 
+    def clean_walk(self, walk):
+        new_walk = {}
+        for e in walk:
+            new_files = []
+            for f in e[2]:
+                if f[0] != '.':
+                    new_name = '.'.join(f.split('.')[:-1])
+                    new_files.append(new_name)
+            new_walk[e[0].replace(self.project_path, '.').replace('/library_gsm', '')] = new_files
+        return new_walk
+
     def list_gsm_objects(self):
         path_library_gsm = self.project_path + '/library_gsm'
-        # self.gsm_objects = os.listdir(path_library_gsm)
-        self.gsm_objects = os.walk(path_library_gsm)
-        for i, v in enumerate(self.gsm_objects):
-            print('{:>3}: {}'.format(i, v))
+        self.gsm_objects = list(os.walk(path_library_gsm))
+        for i, v in self.clean_walk(self.gsm_objects).items():
+            print('{:<10}: {}'.format(i, v))
 
     def import_all(self):
         if os.path.isfile(self.lp_xml_converter):
@@ -59,7 +70,7 @@ class IDACommand(sublime_plugin.WindowCommand):
                        self.project_path + '/library_gsm',
                        self.project_path + '/library_xml'], stdout=PIPE)
             output = p.communicate()[0]
-            output = output.decode("utf-8")[:-2]
+            output = output.decode("utf-8")[:-1]
             output = output.replace('\r', '')
             print("Importing all objects from library.")
             print(output)
@@ -74,7 +85,7 @@ class IDACommand(sublime_plugin.WindowCommand):
                        self.project_path + '/library_xml',
                        self.project_path + '/library_gsm'], stdout=PIPE)
             output = p.communicate()[0]
-            output = output.decode("utf-8")[:-2]
+            output = output.decode("utf-8")[:-1]
             output = output.replace('\r', '')
             print("Making all objects from library.")
             print(output)
@@ -85,32 +96,28 @@ class IDACommand(sublime_plugin.WindowCommand):
 
 class IdaNewObjectCommand(IDACommand):
     def run(self):
-        sublime.error_message('Function not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not yet implemented.')
 
 
 class IdaCurrentMakeCommand(IDACommand):
     def run(self):
-        sublime.error_message('Function not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not yet implemented.')
 
 
 class IdaCurrentImportCommand(IDACommand):
     def run(self):
-        sublime.error_message('Function not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not yet implemented.')
 
 
 class IdaAllMakeCommand(IDACommand):
     def run(self):
         if self.project_name is None:
-            sublime.error_message('You are not in a Project\nPlease work inside a project.')
+            sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
             return
         print(60 * '+')
         self.list_gsm_objects()
         print(60 * '=')
-        print(self.platform)
-        print(self.project_name)
-        print(self.project_path)
-        print(self.current_object)
-        print(60 * '=')
+        print(60 * '+')
         self.make_all()
         print(60 * '+')
 
@@ -118,25 +125,28 @@ class IdaAllMakeCommand(IDACommand):
 class IdaAllImportCommand(IDACommand):
     def run(self):
         if self.project_name is None:
-            sublime.error_message('You are not in a Project\nPlease work inside a project.')
+            sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
             return
         print(60 * '+')
         self.list_gsm_objects()
         print(60 * '=')
-        print(self.platform)
-        print(self.project_name)
-        print(self.project_path)
-        print(self.current_object)
-        print(60 * '=')
+        filename = self.project_path + '/library_xml/Hello_Archicad.xml'
+        with open(filename, 'r', encoding='utf-8') as obj_file:
+            xml = obj_file.read()
+        XML_Root = ET.fromstring(xml)
+        # ET.parse(filename)
+        print(XML_Root.findall('.//Script_2D')[0].items())
+        print(XML_Root.findall('.//Script_2D')[0].text)
+        print(60 * '+')
         self.import_all()
         print(60 * '+')
 
 
 class IdaLibraryMakeCommand(IDACommand):
     def run(self):
-        sublime.error_message('Function not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not yet implemented.')
 
 
 class IdaLibraryUnpackCommand(IDACommand):
     def run(self):
-        sublime.error_message('Function not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not yet implemented.')
