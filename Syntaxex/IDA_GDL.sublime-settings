@@ -1,0 +1,5 @@
+{
+    "extensions": ["gdl"],
+	"color_scheme": "Packages/IDA/Schemes/IDA-Theme-Darker.tmTheme"
+	// "color_scheme": "Packages/IDA/Schemes/IDA-Theme-Lighter.tmTheme"
+}

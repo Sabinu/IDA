@@ -2,7 +2,7 @@
 ---
 name: GDL
 scope: source.gdl
-fileTypes: [gsm, gdl]
+fileTypes: [gdl]
 
 contexts:
   main:
@@ -22,7 +22,7 @@ contexts:
 
   # ======== CONTROLS ======================================
   # FOR, TO, STEP, NEXT, DO, WHILE, ENDWHILE, IF, ENDIF, GROUP, ENDGROUP, REPEAT, UNTIL, THEN, ELSE, GOTO, GOSUB, RETURN, EXIT, BREAKPOINT
-  
+
   - match: (?i)(?<=^|\s)(FOR|TO|STEP|NEXT|DO|WHILE|END(WHILE|IF|GROUP)|REPEAT|UNTIL|IF|THEN|ELSE|RETURN|EXIT|BREAKPOINT)(?=$|\s)
     scope: keyword.control.flow.gdl
 
@@ -33,7 +33,7 @@ contexts:
   # ======== FUNCTIONS =====================================
   - match: (?i)(NOT|ABS|CEIL|INT|FRA|ROUND_INT|SGN|ACS|ASN|ATN|COS|SIN|TAN|PI|EXP|LGT|LOG|SQR|MAX|MIN|RND|STR(\{2\})?|SPLIT|STW|STRLEN|STRSTR|STRSUB|STRTOUPPER|STRTOLOWER|VARDIM[12]|DIM|BITTEST|BITSET|REQ((UEST)(\{2\})?)?|IND|NTR|VARTYPE)(?=\()(.*?)
     scope: keyword.other.special-method.gdl.functions
-  
+
   # - match: (\))
   #   scope: keyword.other.special-method.gdl.functions
 
