@@ -299,6 +299,17 @@
 				<string>#CDD3DE</string>
 			</dict>
 		</dict>
+		<dict>
+			<key>name</key>
+			<string>Escape</string>
+			<key>scope</key>
+			<string>constant.character.escape</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#F77669</string>
+			</dict>
+		</dict>
 	</array>
 	<key>uuid</key>
 	<string>133d1250-19c6-4565-bc93-b37fd36f7fc9</string>
