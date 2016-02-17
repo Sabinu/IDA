@@ -64,7 +64,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Comments</string>
+			<string>comment</string>
 			<key>scope</key>
 			<string>comment</string>
 			<key>settings</key>
@@ -75,7 +75,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Jump labels</string>
+			<string>entity.name.function.gdl.jump</string>
 			<key>scope</key>
 			<string>entity.name.function.gdl.jump</string>
 			<key>settings</key>
@@ -86,7 +86,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Keyword.control</string>
+			<string>keyword.control.flow</string>
 			<key>scope</key>
 			<string>keyword.control.flow</string>
 			<key>settings</key>
@@ -99,7 +99,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_html.meta</string>
+			<string>text.html.mt, meta.tag</string>
 			<key>scope</key>
 			<string>text.html.mt, meta.tag</string>
 			<key>settings</key>
@@ -110,7 +110,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Subroutines</string>
+			<string>entity.name.function</string>
 			<key>scope</key>
 			<string>entity.name.function</string>
 			<key>settings</key>
@@ -121,7 +121,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Support Classes</string>
+			<string>support.type</string>
 			<key>scope</key>
 			<string>support.type</string>
 			<key>settings</key>
@@ -132,7 +132,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Function Methods</string>
+			<string>keyword.other.special-method</string>
 			<key>scope</key>
 			<string>keyword.other.special-method</string>
 			<key>settings</key>
@@ -143,9 +143,9 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Operators</string>
+			<string>keyword.operator</string>
 			<key>scope</key>
-			<string>keyword.operator, constant.other.color</string>
+			<string>keyword.operator</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -154,7 +154,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_String</string>
+			<string>string</string>
 			<key>scope</key>
 			<string>string</string>
 			<key>settings</key>
@@ -165,9 +165,9 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Storage Function</string>
+			<string>storage.type.function</string>
 			<key>scope</key>
-			<string>storage.type.function, keyword.gdl.buffer</string>
+			<string>storage.type.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -178,9 +178,9 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Keyword, Storage</string>
+			<string>keyword</string>
 			<key>scope</key>
-			<string>keyword, storage.type</string>
+			<string>keyword</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -189,7 +189,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Constant</string>
+			<string>constant</string>
 			<key>scope</key>
 			<string>constant.numeric, constant.language</string>
 			<key>settings</key>
@@ -200,7 +200,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Transform</string>
+			<string>keyword.gdl.transform</string>
 			<key>scope</key>
 			<string>keyword.gdl.transform</string>
 			<key>settings</key>
@@ -208,12 +208,12 @@
 				<key>foreground</key>
 				<string>#ff5370</string>
 				<key>fontStyle</key>
-				<string> italic</string>
+				<string> italic  </string>
 			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Argument</string>
+			<string>meta.function-call.arguments</string>
 			<key>scope</key>
 			<string>meta.function-call.arguments</string>
 			<key>settings</key>
@@ -224,7 +224,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Support Variable</string>
+			<string>support.other.variable</string>
 			<key>scope</key>
 			<string>support.other.variable</string>
 			<key>settings</key>
@@ -235,7 +235,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Globals</string>
+			<string>keyword.gdl.globals</string>
 			<key>scope</key>
 			<string>keyword.gdl.globals</string>
 			<key>settings</key>
@@ -248,7 +248,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>_Deprecated</string>
+			<string>invalid.deprecated</string>
 			<key>scope</key>
 			<string>invalid.deprecated</string>
 			<key>settings</key>
@@ -301,13 +301,61 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Escape</string>
+			<string>constant.character.escape</string>
 			<key>scope</key>
 			<string>constant.character.escape</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
 				<string>#F77669</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>constant.other.color</string>
+			<key>scope</key>
+			<string>constant.other.color</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#C792EA</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword.gdl.buffer</string>
+			<key>scope</key>
+			<string>keyword.gdl.buffer</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#7986CB</string>
+				<key>fontStyle</key>
+				<string> italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.type</string>
+			<key>scope</key>
+			<string>storage.type</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#C792EA</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword.gdl.optionalparameters</string>
+			<key>scope</key>
+			<string>keyword.gdl.optionalparameters</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8BD649</string>
+				<key>fontStyle</key>
+				<string> italic</string>
 			</dict>
 		</dict>
 	</array>
