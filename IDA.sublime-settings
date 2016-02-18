@@ -1,9 +1,4 @@
 {
-    "caret_extra_bottom": 2,
-    "caret_extra_top": 2,
-    "caret_extra_width": 2,
-    "caret_style": "solid",
-
     "LP_XML_Converter":
     {
         "OSX": "/Applications/Graphisoft/Archicad 19/Archicad 19.app/Contents/MacOS/LP_XMLConverter.app/Contents/MacOS/LP_XMLConverter",
