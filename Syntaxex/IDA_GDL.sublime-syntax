@@ -23,7 +23,7 @@ contexts:
   # ======== CONTROLS ======================================
   # FOR, TO, STEP, NEXT, DO, WHILE, ENDWHILE, IF, ENDIF, GROUP, ENDGROUP, REPEAT, UNTIL, THEN, ELSE, GOTO, GOSUB, RETURN, EXIT, BREAKPOINT
 
-  - match: (?i)(?<=^|\s)(FOR|TO|STEP|NEXT|DO|WHILE|END(WHILE|IF|GROUP)|REPEAT|UNTIL|IF|THEN|ELSE|RETURN|EXIT|BREAKPOINT)(?=$|\s)
+  - match: (?i)(?<=^|\s)(FOR|TO|STEP|NEXT|DO|WHILE|END(WHILE|IF|GROUP)?|REPEAT|UNTIL|IF|THEN|ELSE|RETURN|EXIT|BREAKPOINT)(?=$|\s)
     scope: keyword.control.flow.gdl
 
   # ======== TRANSFORMS ====================================
@@ -171,7 +171,7 @@ contexts:
   # ========================================================================
 
 
-  - match: (?i)(?<=^|\s|\+|\-|\^|\*|\*\*|\/|\=|<|>|<\=|>\=|<>|\#|=|%|&|\||\@|,)([ABCDEFG]|ZZYZX|ac_\w+|ROOM_([a-z]|_)+)(?=$|\s|\+|\-|\^|\*|\*\*|\/|\=|<|>|<\=|>\=|<>|\#|=|%|&|\||\@|,)
+  - match: (?i)(?<=^|\s|\+|\-|\^|\*|\*\*|\/|\=|<|>|<\=|>\=|<>|\#|=|%|&|\||\@|,)([ABCDEFG]|ZZYZX|ac_\w+|gs_\w+|ROOM_([a-z]|_)+)(?=$|\s|\+|\-|\^|\*|\*\*|\/|\=|<|>|<\=|>\=|<>|\#|=|%|&|\||\@|,)
     scope: keyword.gdl.optionalparameters
 
   - match: (?i)(\b)(PUT|GET|USE|NSP)(\b)
