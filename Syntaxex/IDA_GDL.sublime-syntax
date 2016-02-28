@@ -21,7 +21,7 @@ contexts:
     scope: keyword.operator.gdl
 
   # ======== CONTROLS ======================================
-  # FOR, TO, STEP, NEXT, DO, WHILE, ENDWHILE, IF, ENDIF, GROUP, ENDGROUP, REPEAT, UNTIL, THEN, ELSE, GOTO, GOSUB, RETURN, EXIT, BREAKPOINT
+  # for, to, step, next, do, while, endwhile, if, endif, group, endgroup, repeat, until, then, else, goto, gosub, return, exit, breakpoint
 
   - match: (?i)(?<=^|\s)(FOR|TO|STEP|NEXT|DO|WHILE|END(WHILE|IF|GROUP)?|REPEAT|UNTIL|IF|THEN|ELSE|RETURN|EXIT|BREAKPOINT)(?=$|\s)
     scope: keyword.control.flow.gdl
