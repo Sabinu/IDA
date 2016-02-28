@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-
 <plist version="1.0">
 <dict>
   <key>author</key>
-  <string>Mattia Astorino (http:&#x2f;&#x2f;astorinomattia.it)</string>
+  <string>Sabin Purice</string>
   <key>name</key>
   <string>IDA Material Theme</string>
   <key>semanticClass</key>
