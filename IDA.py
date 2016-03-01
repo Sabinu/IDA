@@ -61,6 +61,9 @@ class IDACommand(sublime_plugin.WindowCommand):
             print('{:<10}: {}'.format(i, v))
 
     def import_all(self):
+        ''' imports all objects in project
+            transforms all source folders in .gsm files
+        '''
         if os.path.isfile(self.lp_xml_converter):
             output = None
             p = Popen([self.lp_xml_converter,
@@ -76,6 +79,9 @@ class IDACommand(sublime_plugin.WindowCommand):
             print(output)
 
     def make_all(self):
+        ''' makes all objects in project
+            transforms all source folders in .gsm files
+        '''
         if os.path.isfile(self.lp_xml_converter):
             output = None
             p = Popen([self.lp_xml_converter,
@@ -124,6 +130,7 @@ class IdaAllMakeCommand(IDACommand):
 
 class IdaAllImportCommand(IDACommand):
     def run(self):
+        # Check if user is in a project
         if self.project_name is None:
             sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
             return
