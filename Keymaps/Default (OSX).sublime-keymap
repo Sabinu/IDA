@@ -1,0 +1,3 @@
+[
+  { "keys": ["super+shift+k", "i"], "command": "ida_all_import" },
+]
