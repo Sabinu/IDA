@@ -20,6 +20,12 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.settings = sublime.load_settings('IDA.sublime-settings')
         self.lp_xml_converter = self.settings.get('LP_XML_Converter')[self.platform]
 
+    def check_project(self):
+        # Check if user is in a project
+        if self.project_name is None:
+            sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
+            return
+
     def get_lp_xml(self):
         if self.lp_xml_converter is None:
             self.window.show_input_panel('Archicad Version:', '19', self.done_lp_xml, self.change_lp_xml, self.cancel_lp_xml)
@@ -55,7 +61,7 @@ class IDACommand(sublime_plugin.WindowCommand):
         return new_walk
 
     def list_gsm_objects(self):
-        path_library_gsm = self.project_path + '/library_gsm'
+        path_library_gsm = self.project_path + '/library_gsm'  # TODO
         self.gsm_objects = list(os.walk(path_library_gsm))
         for i, v in self.clean_walk(self.gsm_objects).items():
             print('{:<10}: {}'.format(i, v))
@@ -117,9 +123,7 @@ class IdaCurrentImportCommand(IDACommand):
 
 class IdaAllMakeCommand(IDACommand):
     def run(self):
-        if self.project_name is None:
-            sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
-            return
+        self.check_project()
         print(60 * '+')
         self.list_gsm_objects()
         print(60 * '=')
@@ -130,11 +134,9 @@ class IdaAllMakeCommand(IDACommand):
 
 class IdaAllImportCommand(IDACommand):
     def run(self):
-        # Check if user is in a project
-        if self.project_name is None:
-            sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
-            return
+        self.check_project()
         print(60 * '+')
+        self.list_project_info()
         self.list_gsm_objects()
         print(60 * '=')
         filename = self.project_path + '/library_xml/Hello_Archicad.xml'
