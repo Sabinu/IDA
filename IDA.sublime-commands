@@ -1,0 +1,6 @@
+[
+  {
+    "caption": "IDA: Import - All Objects",
+    "command": "ida_all_import"
+  },
+]
