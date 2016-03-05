@@ -1,0 +1,25 @@
+[{
+  "id": "tools",
+  "children": [{
+    "id": "ida",
+    "caption": "IDA",
+    "children": [{
+      "caption": "Import - All Objects",
+      "command": "ida_all_import"
+    }, 
+    ]
+  }]
+}, {
+  "id": "preferences",
+  "children": [{
+    "id": "package-settings",
+    "children": [{
+      "caption": "IDA",
+      "children": [{
+        "caption": "Import - All Objects",
+        "command": "ida_all_import"
+      }, 
+      ]
+    }]
+  }]
+}]
