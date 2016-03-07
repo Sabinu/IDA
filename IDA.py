@@ -9,6 +9,16 @@ from subprocess import Popen, PIPE
 import xml.etree.ElementTree as ET
 
 
+def clip_path(path, folder):
+    ''' clips path sequence at folder
+        returns path from folder(except) to the end, except file
+    '''
+    path = path.split('/')
+    clip = path.index(folder)
+    output = '/'.join(path[clip+1:])
+    return output
+
+
 class IDACommand(sublime_plugin.WindowCommand):
     def __init__(self, *args):
         super().__init__(*args)
@@ -78,21 +88,23 @@ class IDACommand(sublime_plugin.WindowCommand):
         for k, v in self.project_info.items():
             print('{:<25}: {}'.format(k, v))
 
-    def clean_walk(self, walk):
+# ========= BLEND WITH LIST_OBJECTS ==================================
+    def get_tree(self, walk=None, folder=None):
         ''' TODO
             must return a clean list of objects(name & path)
             regardless of the source of the walk.
             which could only be from: `backup`, `library`, `code` or `xml` folders
         '''
-        new_walk = {}
-        for e in walk:
-            new_files = []
-            for f in e[2]:
+        folder = folder.split('/')[-1]
+        tree = []
+        for i in walk:
+            for f in i[2]:
                 if f[0] != '.':
-                    new_name = '.'.join(f.split('.')[:-1])
-                    new_files.append(new_name)
-            new_walk[e[0].replace(self.project_path, '.').replace('/TESTIDA.library', '')] = new_files
-        return new_walk
+                    tree.append((clip_path(i[0], folder), f))
+        # if self.tree is None:  # TODO make tree available in JSON file, as reference
+        #     self.tree = tree
+        return tree
+
 
     def list_objects(self, folder=None, output=False):
         ''' TODO
@@ -102,28 +114,12 @@ class IDACommand(sublime_plugin.WindowCommand):
         print(60 * '=')
         print('GSM OBJECTS in {}'.format(folder))
         print(60 * '=')
-        objects = list(os.walk(folder))
-        for k, v in self.clean_walk(objects).items():
-            print('{:<10}: {}'.format(k, v))
-        return objects
-
-    def import_all(self):
-        ''' imports all objects in project
-            transforms all source folders in .gsm files
-        '''
-        if os.path.isfile(self.lp_xml_converter):
-            output = None
-            p = Popen([self.lp_xml_converter,
-                       'l2x',
-                       '-img',
-                       self.project_path + '/bitmaps',
-                       self.project_path + '/library_gsm',
-                       self.project_path + '/library_xml'], stdout=PIPE)
-            output = p.communicate()[0]
-            output = output.decode("utf-8")[:-1]
-            output = output.replace('\r', '')
-            print("Importing all objects from library.")
-            print(output)
+        walk = list(os.walk(folder))
+        tree = self.get_tree(walk, folder)
+        for i in tree:
+            print('{:<30}: {}'.format(i[0], i[1]))
+        return tree
+# ========= BLEND WITH LIST_OBJECTS ==================================
 
     def make_all(self):
         ''' makes all objects in project
@@ -134,18 +130,34 @@ class IDACommand(sublime_plugin.WindowCommand):
             p = Popen([self.lp_xml_converter,
                        'x2l',
                        '-img',
-                       self.project_path + '/bitmaps',
-                       self.project_path + '/library_xml',
-                       self.project_path + '/library_gsm'], stdout=PIPE)
+                       self.folder_images,
+                       self.folder_xml,
+                       self.project_library], stdout=PIPE)
+            # TODO add password option
             output = p.communicate()[0]
             output = output.decode("utf-8")[:-1]
             output = output.replace('\r', '')
             print("Making all objects from library.")
             print(output)
 
-    def get_object(self):
-        pass
-
+    def import_all(self):
+        ''' gets all objects from library folder
+            puts them in the xml folder
+        '''
+        if os.path.isfile(self.lp_xml_converter):
+            output = None
+            p = Popen([self.lp_xml_converter,
+                       'l2x',
+                       '-img',
+                       self.folder_images,
+                       self.folder_library,
+                       self.folder_xml], stdout=PIPE)
+            # TODO add password option
+            output = p.communicate()[0]
+            output = output.decode("utf-8")[:-1]
+            output = output.replace('\r', '')
+            print("Importing all objects from library.")
+            print(output)
 
 class IdaNewObjectCommand(IDACommand):
     def run(self):
@@ -176,23 +188,23 @@ class IdaAllMakeCommand(IDACommand):
 
 class IdaAllImportCommand(IDACommand):
     def run(self):
+        self.import_all()
         if not self.check_project():
             return
         print(60 * '+')
         print('IDA Import All')
         print(60 * '+')
-        self.list_project_info()
-        objects = self.list_objects(self.folder_library)
+        # self.list_project_info()
+        objects = self.list_objects(self.folder_xml)
         print(60 * '=')
-        filename = self.project_path + '/library_xml/Hello_Archicad.xml'
-        with open(filename, 'r', encoding='utf-8') as obj_file:
-            xml = obj_file.read()
-        XML_Root = ET.fromstring(xml)
-        # ET.parse(filename)
-        print(XML_Root.findall('.//Script_2D')[0].items())
-        print(XML_Root.findall('.//Script_2D')[0].text)
-        print(60 * '+')
-        self.import_all()
+        for lp in objects:
+            filename = self.folder_xml + '/' + lp[0] + '/' + lp[1]
+            with open(filename, 'r', encoding='utf-8') as obj_file:
+                xml = obj_file.read()
+            lp_root = ET.fromstring(xml)
+            # self.unpack_object(lp, lp_root)
+            print(lp_root.findall('.//Script_2D')[0].items())
+            print(lp_root.findall('.//Script_2D')[0].text)
         print(60 * '+')
 
 
