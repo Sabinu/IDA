@@ -19,14 +19,34 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.current_object = self.project_info.get('file_path', None)
         self.settings = sublime.load_settings('IDA.sublime-settings')
         self.lp_xml_converter = self.settings.get('LP_XML_Converter')[self.platform]
+        self.objects = None  # TODO try to ingest objects at __init__
+        self.initiate_folders()
 
-    def check_project(self):
-        # Check if user is in a project
+    def initiate_folders(self):
+        ''' initiates paths of needed folders. '''
         if self.project_name is None:
-            sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
             return
+        self.folder_backup = self.project_path + '/' + self.project_name + '.backup'
+        self.folder_images = self.project_path + '/' + 'images'
+        self.folder_code = self.project_path + '/' + 'CODE'
+        self.folder_library = self.project_path + '/' + self.project_name + '.library'
+        self.folder_xml = self.project_path + '/' + self.project_name + '.xml'
+
+    def check_project(self, output=True):
+        ''' Check if user is in a project.
+            returns: True or False.
+        '''
+        if self.project_name is None:
+            if output:
+                sublime.error_message('IDA Message:\nYou are not in a Project\nPlease work inside a project.')
+            return False
+        else:
+            return True
 
     def get_lp_xml(self):
+        ''' TODO
+            returns the path/adress of the LP_XML Converter.
+        '''
         if self.lp_xml_converter is None:
             self.window.show_input_panel('Archicad Version:', '19', self.done_lp_xml, self.change_lp_xml, self.cancel_lp_xml)
         return self.lp_xml_converter
@@ -43,13 +63,27 @@ class IDACommand(sublime_plugin.WindowCommand):
     # ======================================================
 
     def list_lp_xml(self):
+        ''' INSPECTION method
+            prints the path of the LP_XML Converter to the console.
+        '''
         print('>>> LP_XML_Converter: {}'.format(self.get_lp_xml()))
 
     def list_project_info(self):
+        ''' INSPECTION Method
+            prints the project info to the console.
+        '''
+        print(60 * '=')
+        print('PROJECT INFO')
+        print(60 * '=')
         for k, v in self.project_info.items():
             print('{:<25}: {}'.format(k, v))
 
     def clean_walk(self, walk):
+        ''' TODO
+            must return a clean list of objects(name & path)
+            regardless of the source of the walk.
+            which could only be from: `backup`, `library`, `code` or `xml` folders
+        '''
         new_walk = {}
         for e in walk:
             new_files = []
@@ -57,14 +91,21 @@ class IDACommand(sublime_plugin.WindowCommand):
                 if f[0] != '.':
                     new_name = '.'.join(f.split('.')[:-1])
                     new_files.append(new_name)
-            new_walk[e[0].replace(self.project_path, '.').replace('/library_gsm', '')] = new_files
+            new_walk[e[0].replace(self.project_path, '.').replace('/TESTIDA.library', '')] = new_files
         return new_walk
 
-    def list_gsm_objects(self):
-        path_library_gsm = self.project_path + '/library_gsm'  # TODO
-        self.gsm_objects = list(os.walk(path_library_gsm))
-        for i, v in self.clean_walk(self.gsm_objects).items():
-            print('{:<10}: {}'.format(i, v))
+    def list_objects(self, folder=None, output=False):
+        ''' TODO
+            must output all objects in specified folder 
+            returns a list with objects(name & path)
+        '''
+        print(60 * '=')
+        print('GSM OBJECTS in {}'.format(folder))
+        print(60 * '=')
+        objects = list(os.walk(folder))
+        for k, v in self.clean_walk(objects).items():
+            print('{:<10}: {}'.format(k, v))
+        return objects
 
     def import_all(self):
         ''' imports all objects in project
@@ -123,7 +164,8 @@ class IdaCurrentImportCommand(IDACommand):
 
 class IdaAllMakeCommand(IDACommand):
     def run(self):
-        self.check_project()
+        if not self.check_project():
+            return
         print(60 * '+')
         self.list_gsm_objects()
         print(60 * '=')
@@ -134,10 +176,13 @@ class IdaAllMakeCommand(IDACommand):
 
 class IdaAllImportCommand(IDACommand):
     def run(self):
-        self.check_project()
+        if not self.check_project():
+            return
+        print(60 * '+')
+        print('IDA Import All')
         print(60 * '+')
         self.list_project_info()
-        self.list_gsm_objects()
+        objects = self.list_objects(self.folder_library)
         print(60 * '=')
         filename = self.project_path + '/library_xml/Hello_Archicad.xml'
         with open(filename, 'r', encoding='utf-8') as obj_file:
