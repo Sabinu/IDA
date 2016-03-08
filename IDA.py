@@ -8,6 +8,15 @@ import time
 from subprocess import Popen, PIPE
 import xml.etree.ElementTree as ET
 
+scripts = {"Script_1D": "0 Master Script",
+           "Script_2D": "1 2D Script",
+           "Script_3D": "2 3D Script",
+           "Script_VL": "3 Parameter Script",
+           "Script_UI": "4 Interface Script",
+           "Script_PR": "5 Properties Script",
+           "Script_FWM": "6 Forward Migration",
+           "Script_BWM": "7 Backward Migration"}
+
 
 def clip_path(path, folder):
     ''' clips path sequence at folder
@@ -112,7 +121,7 @@ class IDACommand(sublime_plugin.WindowCommand):
             returns a list with objects(name & path)
         '''
         print(60 * '=')
-        print('GSM OBJECTS in {}'.format(folder))
+        print('GSM OBJECTS in {}'.format(folder.split('/')[-1]))
         print(60 * '=')
         walk = list(os.walk(folder))
         tree = self.get_tree(walk, folder)
@@ -199,12 +208,21 @@ class IdaAllImportCommand(IDACommand):
         print(60 * '=')
         for lp in objects:
             filename = self.folder_xml + '/' + lp[0] + '/' + lp[1]
+            # os.mkdirs(self.folder_code + '/' + lp[0])
             with open(filename, 'r', encoding='utf-8') as obj_file:
                 xml = obj_file.read()
             lp_root = ET.fromstring(xml)
             # self.unpack_object(lp, lp_root)
-            print(lp_root.findall('.//Script_2D')[0].items())
-            print(lp_root.findall('.//Script_2D')[0].text)
+            s_num = 0
+            for k in scripts:
+                t = lp_root.find('.//' + k).text
+                if t.strip() != '':
+                    s_num += 1
+            print('Found {} Scripts in {}'.format(s_num, lp[1]))
+            # for i in list(lp_root.iter()):
+            #     print(i)
+            # print(lp_root.findall('.//Script_2D')[0].items())
+            # print(lp_root.findall('.//Script_2D')[0].text)
         print(60 * '+')
 
 
