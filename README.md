@@ -1,4 +1,4 @@
-# IDA [Sublime Package]
+# IDA
 
-IDA is an Integrated Development for Archicad GDL(Geometric Description Language)
+IDA is a Sublime Package for Integrated Development for Archicad GDL (Geometric Description Language)
 
