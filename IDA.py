@@ -22,9 +22,9 @@ def clip_path(path, folder):
     ''' clips path sequence at folder
         returns path from folder(except) to the end, except file
     '''
-    path = path.split('/')
+    path = path.split(os.sep)
     clip = path.index(folder)
-    output = '/'.join(path[clip+1:])
+    output = os.sep.join(path[clip+1:])
     return output
 
 
@@ -45,11 +45,11 @@ class IDACommand(sublime_plugin.WindowCommand):
         ''' initiates paths of needed folders. '''
         if self.project_name is None:
             return
-        self.folder_backup = self.project_path + '/' + self.project_name + '.backup'
-        self.folder_images = self.project_path + '/' + 'images'
-        self.folder_code = self.project_path + '/' + 'CODE'
-        self.folder_library = self.project_path + '/' + self.project_name + '.library'
-        self.folder_xml = self.project_path + '/' + self.project_name + '.xml'
+        self.folder_backup = self.project_path + os.sep + self.project_name + '.backup'
+        self.folder_images = self.project_path + os.sep + 'images'
+        self.folder_code = self.project_path + os.sep + 'CODE'
+        self.folder_library = self.project_path + os.sep + self.project_name + '.library'
+        self.folder_xml = self.project_path + os.sep + self.project_name + '.xml'
 
     def check_project(self, output=True):
         ''' Check if user is in a project.
@@ -104,7 +104,7 @@ class IDACommand(sublime_plugin.WindowCommand):
             regardless of the source of the walk.
             which could only be from: `backup`, `library`, `code` or `xml` folders
         '''
-        folder = folder.split('/')[-1]
+        folder = folder.split(os.sep)[-1]
         tree = []
         for i in walk:
             for f in i[2]:
@@ -114,14 +114,13 @@ class IDACommand(sublime_plugin.WindowCommand):
         #     self.tree = tree
         return tree
 
-
     def list_objects(self, folder=None, output=False):
         ''' TODO
-            must output all objects in specified folder 
+            must output all objects in specified folder
             returns a list with objects(name & path)
         '''
         print(60 * '=')
-        print('GSM OBJECTS in {}'.format(folder.split('/')[-1]))
+        print('GSM OBJECTS in {}'.format(folder.split(os.sep)[-1]))
         print(60 * '=')
         walk = list(os.walk(folder))
         tree = self.get_tree(walk, folder)
@@ -167,6 +166,7 @@ class IDACommand(sublime_plugin.WindowCommand):
             output = output.replace('\r', '')
             print("Importing all objects from library.")
             print(output)
+
 
 class IdaNewObjectCommand(IDACommand):
     def run(self):
