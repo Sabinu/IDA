@@ -1,6 +1,6 @@
 # IDA
 
-IDA is a [Sublime Text](http://www.sublimetext.com/) [Package](https://packagecontrol.io/) for Integrated Development for [Archicad](http://www.graphisoft.com/) [GDL](https://en.wikipedia.org/wiki/Geometric_Description_Language) (Geometric Description Language)
+IDA is a [Sublime Text](http://www.sublimetext.com/) [Package](https://packagecontrol.io/) for Interactive Development for [Archicad](http://www.graphisoft.com/) [GDL](https://en.wikipedia.org/wiki/Geometric_Description_Language) (Geometric Description Language)
 
 ## Useful Links
 

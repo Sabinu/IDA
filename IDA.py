@@ -208,12 +208,13 @@ class IdaAllImportCommand(IDACommand):
         print(60 * '=')
         for lp in objects:
             filename = '{}/{}/{}'.format(self.folder_xml, lp[0], lp[1])
-            # TODO try to put this in method, make structure at given folder
+            # TODO try to put this in method, make structure at given folder ===
             lp_name = lp[1].split('.')[0]
             try:
                 os.makedirs('{}/{}/{}.CODE'.format(self.folder_code, lp[0], lp_name))
             except:
                 pass
+            # ==================================================================
             with open(filename, 'r', encoding='utf-8') as obj_file:
                 xml = obj_file.read()
             lp_root = ET.fromstring(xml)
@@ -223,6 +224,7 @@ class IdaAllImportCommand(IDACommand):
                 t = lp_root.find('.//' + k).text
                 if t.strip() != '':
                     s_num += 1
+                    # TODO - Make Script Files
             print('Found {} Scripts in {}'.format(s_num, lp[1]))
             # for i in list(lp_root.iter()):
             #     print(i)
