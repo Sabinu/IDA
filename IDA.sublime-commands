@@ -1,6 +1,10 @@
 [
   {
-    "caption": "IDA: Import - All Objects",
+    "caption": "ida: Import - All Objects",
     "command": "ida_all_import"
+  },
+  {
+    "caption": "ida: Make - All Objects",
+    "command": "ida_all_make"
   },
 ]

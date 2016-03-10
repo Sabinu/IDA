@@ -1,3 +1,4 @@
 [
   { "keys": ["super+shift+k", "i"], "command": "ida_all_import" },
+  { "keys": ["super+shift+k", "m"], "command": "ida_all_make" },
 ]

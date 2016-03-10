@@ -190,22 +190,50 @@ class IdaAllMakeCommand(IDACommand):
         if not self.check_project():
             return
         print(60 * '+')
-        self.list_gsm_objects()
-        print(60 * '=')
+        print('IDA Make All')
         print(60 * '+')
-        self.make_all()
+        # TODO ok for now, but source should be CODE_folder
+        # This means only scripts in XML will be 'Made'
+        objects = self.list_objects(self.folder_xml)
+        print(60 * '=')
+        for lp in objects:
+            # TODO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< THIS IS WHERE YOU BEGIN
+            filename = '{}/{}/{}'.format(self.folder_xml, lp.path, lp.name)
+            # TODO try to put this in method, make structure at given folder ===
+            lp_name = lp.name.split('.')[0]  # this seems pointless
+            try:
+                os.makedirs('{}/{}/{}.CODE'.format(self.folder_code, lp.path, lp_name))
+            except:
+                pass
+            # ==================================================================
+            with open(filename, 'r', encoding='utf-8') as obj_file:
+                xml = obj_file.read()
+            lp_root = ET.fromstring(xml)
+            # self.unpack_object(lp, lp_root)
+            s_num = 0
+            for script_name in scripts:
+                t = lp_root.find('.//' + script_name).text
+                t = t[2:-2]
+                if t != '':
+                    s_num += 1
+                    script_file = '{}/{}/{}.CODE/{}.gdl'.format(self.folder_code, lp.path, lp_name, scripts[script_name])
+                    with open(script_file, 'w', encoding='utf-8') as scr_file:
+                        scr_file.write(t)
+            print('Imported {} Scripts from: {}'.format(s_num, lp_name))
+            # for i in list(lp_root.iter()):
+            #     print(i)
+        # self.import_all()  # <<<<<<<<<<<<<<<< MAKE ON
         print(60 * '+')
 
 
 class IdaAllImportCommand(IDACommand):
     def run(self):
-        self.import_all()
         if not self.check_project():
             return
+        self.import_all()
         print(60 * '+')
         print('IDA Import All')
         print(60 * '+')
-        # self.list_project_info()
         objects = self.list_objects(self.folder_xml)
         print(60 * '=')
         for lp in objects:

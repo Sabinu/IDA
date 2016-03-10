@@ -3,23 +3,38 @@
   "children": [{
     "id": "ida",
     "caption": "IDA",
-    "children": [{
-      "caption": "Import - All Objects",
-      "command": "ida_all_import"
-    }, 
+    "children": [
+      {
+        "caption": "Import - All Objects",
+        "command": "ida_all_import"
+      }, 
+      {
+        "caption": "Make - All Objects",
+        "command": "ida_all_make"
+      }
     ]
   }]
 }, {
   "id": "preferences",
-  "children": [{
-    "id": "package-settings",
-    "children": [{
-      "caption": "IDA",
-      "children": [{
-        "caption": "Import - All Objects",
-        "command": "ida_all_import"
-      }, 
+  "children": [
+    {
+      "id": "package-settings",
+      "children": [
+        {
+          "caption": "IDA",
+          "children": [
+            {
+              "caption": "Import - All Objects",
+              "command": "ida_all_import"
+            },
+            {
+              "caption": "Make - All Objects",
+              "command": "ida_all_make"
+            }
+          ]
+        }
       ]
-    }]
-  }]
-}]
+    }
+  ]
+}
+]
