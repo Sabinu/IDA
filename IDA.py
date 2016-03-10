@@ -6,11 +6,12 @@ import filecmp
 import shutil
 import time
 from subprocess import Popen, PIPE
+from collections import namedtuple as nt
 import xml.etree.ElementTree as ET
 
 scripts = {"Script_1D": "0 Master Script",
-           "Script_2D": "1 2D Script",
-           "Script_3D": "2 3D Script",
+           "Script_2D": "1 Script 2D",
+           "Script_3D": "2 Script 3D",
            "Script_VL": "3 Parameter Script",
            "Script_UI": "4 Interface Script",
            "Script_PR": "5 Properties Script",
@@ -106,10 +107,11 @@ class IDACommand(sublime_plugin.WindowCommand):
         '''
         folder = folder.split(os.sep)[-1]
         tree = []
+        library_part = nt('library_part', 'path name')
         for i in walk:
             for f in i[2]:
                 if f[0] != '.':
-                    tree.append((clip_path(i[0], folder), f))
+                    tree.append(library_part(path=clip_path(i[0], folder), name=f))
         # if self.tree is None:  # TODO make tree available in JSON file, as reference
         #     self.tree = tree
         return tree
@@ -207,11 +209,11 @@ class IdaAllImportCommand(IDACommand):
         objects = self.list_objects(self.folder_xml)
         print(60 * '=')
         for lp in objects:
-            filename = '{}/{}/{}'.format(self.folder_xml, lp[0], lp[1])
+            filename = '{}/{}/{}'.format(self.folder_xml, lp.path, lp.name)
             # TODO try to put this in method, make structure at given folder ===
-            lp_name = lp[1].split('.')[0]
+            lp_name = lp.name.split('.')[0]  # this seems pointless
             try:
-                os.makedirs('{}/{}/{}.CODE'.format(self.folder_code, lp[0], lp_name))
+                os.makedirs('{}/{}/{}.CODE'.format(self.folder_code, lp.path, lp_name))
             except:
                 pass
             # ==================================================================
@@ -220,16 +222,17 @@ class IdaAllImportCommand(IDACommand):
             lp_root = ET.fromstring(xml)
             # self.unpack_object(lp, lp_root)
             s_num = 0
-            for k in scripts:
-                t = lp_root.find('.//' + k).text
-                if t.strip() != '':
+            for script_name in scripts:
+                t = lp_root.find('.//' + script_name).text
+                t = t[2:-2]
+                if t != '':
                     s_num += 1
-                    # TODO - Make Script Files
-            print('Found {} Scripts in {}'.format(s_num, lp[1]))
+                    script_file = '{}/{}/{}.CODE/{}.gdl'.format(self.folder_code, lp.path, lp_name, scripts[script_name])
+                    with open(script_file, 'w', encoding='utf-8') as scr_file:
+                        scr_file.write(t)
+            print('Imported {} Scripts from: {}'.format(s_num, lp_name))
             # for i in list(lp_root.iter()):
             #     print(i)
-            # print(lp_root.findall('.//Script_2D')[0].items())
-            # print(lp_root.findall('.//Script_2D')[0].text)
         print(60 * '+')
 
 
