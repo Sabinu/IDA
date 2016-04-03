@@ -198,18 +198,20 @@ class IdaAllMakeCommand(IDACommand):
         print(60 * '=')
         for lp in objects:
             # TODO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< THIS IS WHERE YOU BEGIN
-            filename = '{}/{}/{}'.format(self.folder_xml, lp.path, lp.name)
+            folder_name = self.folder_xml + '.test'
+            filename = '{}/{}{}'.format(folder_name, lp.path, lp.name)
+            xml_file = '{}/{}/{}'.format(self.folder_xml, lp.path, lp.name)
             # TODO try to put this in method, make structure at given folder ===
             lp_name = lp.name.split('.')[0]  # this seems pointless
             try:
-                os.makedirs('{}/{}/{}.CODE'.format(self.folder_code, lp.path, lp_name))
+                os.makedirs('{}/{}/{}'.format(folder_name, lp.path, lp_name))
             except:
                 pass
             # ==================================================================
-            with open(filename, 'r', encoding='utf-8') as obj_file:
+            with open(xml_file, 'r', encoding='utf-8') as obj_file:
                 xml = obj_file.read()
             lp_root = ET.fromstring(xml)
-            # self.unpack_object(lp, lp_root)
+            # You've got to look in the .CODE folder for the number of scripts to insert
             s_num = 0
             for script_name in scripts:
                 t = lp_root.find('.//' + script_name).text
@@ -220,8 +222,6 @@ class IdaAllMakeCommand(IDACommand):
                     with open(script_file, 'w', encoding='utf-8') as scr_file:
                         scr_file.write(t)
             print('Imported {} Scripts from: {}'.format(s_num, lp_name))
-            # for i in list(lp_root.iter()):
-            #     print(i)
         # self.import_all()  # <<<<<<<<<<<<<<<< MAKE ON
         print(60 * '+')
 
