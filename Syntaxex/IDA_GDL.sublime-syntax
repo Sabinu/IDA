@@ -23,7 +23,7 @@ contexts:
   # ======== CONTROLS ======================================
   # for, to, step, next, do, while, endwhile, if, endif, group, endgroup, repeat, until, then, else, goto, gosub, return, exit, breakpoint
 
-  - match: (?i)(?<=^|\s)(FOR|TO|STEP|NEXT|DO|WHILE|END(WHILE|IF|GROUP)?|REPEAT|UNTIL|IF|THEN|ELSE|RETURN|EXIT|BREAKPOINT)(?=$|\s)
+  - match: (?i)(?<=^|\s)(FOR|TO|STEP|NEXT|DO|WHILE|END(WHILE|IF|GROUP|PARAGRAPH)?|REPEAT|UNTIL|IF|THEN|ELSE|RETURN|EXIT|BREAKPOINT)(?=$|\s)
     scope: keyword.control.flow.gdl
 
   # ======== TRANSFORMS ====================================
@@ -85,7 +85,7 @@ contexts:
   - match: (?i)(?<=^|\s)(HOTSPOT[2]?|HOTLINE[2]?|HOTARC[2]?)(?=$|\s)
     scope: keyword.gdl.hotedits
 
-  # ATTRS
+  # ATTRIBUTES
   - match: (?i)(?<=^|\s)(DEFINE|SET|BASED_ON|DIM)(?=\s)
     scope: storage.type.function.gdl
 
