@@ -58,9 +58,9 @@ contexts:
     scope: keyword.gdl.shape.3D.primitive
 
   - match: (?i)(?<=^|\s)(POINTCLOUD)(?=$|\s)
-    scope: keyword.gdl.shape.3D.pointclouds
+    scope: keyword.gdl.shape.3D.pointcloud
 
-  - match: (?i)(?<=^|\s)(PRISM_?|[BFH]PRISM_|[CS]PRISM_(\{[23]\})?)(?=$|\s)
+  - match: (?i)(?<=^|\s)(PRISM_?|[BFH]PRISM_|[CS]PRISM_(\{[234]\})?)(?=$|\s)
     scope: keyword.gdl.shape.3D.prisms
 
   - match: (?i)(?<=^|\s)(PYRAMID|RULED(\{2\})?|EXTRUDE|SWEEP|TUBE[A]?|MASS(\{2\})?|COONS|REVOLVE(\{[2-5]\})?|(EXTRUDED|REVOLVED|RULED)SHELL(\{2\})?|REVOLVEDSHELLANGULAR(\{2\})?)(?=$|\s)

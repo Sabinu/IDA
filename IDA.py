@@ -9,6 +9,9 @@ from subprocess import Popen, PIPE
 from collections import namedtuple as nt
 import xml.etree.ElementTree as ET
 
+import webbrowser
+import urllib
+
 scripts = {"Script_1D": "0 Master Script",
            "Script_2D": "1 Script 2D",
            "Script_3D": "2 Script 3D",
@@ -272,3 +275,41 @@ class IdaLibraryMakeCommand(IDACommand):
 class IdaLibraryUnpackCommand(IDACommand):
     def run(self):
         sublime.error_message('IDA Message:\nFunction not yet implemented.')
+
+# class IdaGdlDocsCommand(IDACommand):
+#     def run(self):
+#         window = self.window
+#         view = window.active_view()
+#         sel = view.sel()
+#         region = sel[0]
+#         print(region.a, region.b)
+#         print('>>')
+#         word = view.word(region)
+#         print('<<')
+#         selectionText = view.substr(word)
+#         print('+' + selectionText + '+')
+
+
+class IdaGdlDocsCommand(sublime_plugin.TextCommand):
+    def run(self, selected_text):
+        try:
+            selections = self.view.sel()
+            if selections:
+                needle = self.view.substr(selections[0])
+                if len(needle) == 0:
+                    print("IDA: You did not select text. Try again.")
+                else:
+                    url = "http://gdl.graphisoft.com/?s=" + needle
+                    url = urllib.parse.urlparse(url).geturl()
+                    
+                    user_message = "PyDOC: Performing search: '" + needle + "'"
+                    print(user_message)
+                    sublime.status_message(user_message)
+                    webbrowser.open(url)
+            else:
+                print("IDA: You did not select text. Try again.")
+                sublime.status_message("IDA: Text was not selected")
+        except Exception as e:
+            print("IDA: There was an error during the execution of the plugin.\n")
+            sublime.status_message("IDA: Open console for info")
+            raise e

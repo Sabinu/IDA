@@ -33,6 +33,13 @@
 		{
 			"command": "ida_library_unpack",
 			"caption": "Library - Un-pack"
+		},
+		{
+			"caption": "-"
+		},
+		{
+			"command": "ida_gdl_docs",
+			"caption": "Get Official Documentation"
 		}
 		]
 	},

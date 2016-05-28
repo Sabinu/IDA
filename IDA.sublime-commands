@@ -7,4 +7,8 @@
     "caption": "ida: Make - All Objects",
     "command": "ida_all_make"
   },
+  {
+    "caption": "ida: GDL Official Documentation",
+    "command": "ida_gdl_docs"
+  }
 ]
