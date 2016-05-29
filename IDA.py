@@ -300,9 +300,8 @@ class IdaGdlDocsCommand(sublime_plugin.TextCommand):
                     print("IDA: You did not select text. Try again.")
                 else:
                     url = "http://gdl.graphisoft.com/?s=" + needle
-                    url = urllib.parse.urlparse(url).geturl()
-                    
-                    user_message = "PyDOC: Performing search: '" + needle + "'"
+                    url = urllib.parse.urlparse(url).geturl()                    
+                    user_message = "IDA: Performing search: '" + needle + "'"
                     print(user_message)
                     sublime.status_message(user_message)
                     webbrowser.open(url)
