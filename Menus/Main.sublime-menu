@@ -25,12 +25,63 @@
           "caption": "IDA",
           "children": [
             {
-              "caption": "Import - All Objects",
-              "command": "ida_all_import"
+              "args": {
+                "file": "${packages}/IDA/README.md"
+              },
+              "caption": "Readme",
+              "command": "open_file"
             },
             {
-              "caption": "Make - All Objects",
-              "command": "ida_all_make"
+              "caption": "-"
+            },
+            {
+              "args": {
+                "file": "${packages}/IDA/Settings/Default (OSX).sublime-settings",
+                "platform": "OSX"
+              },
+              "caption": "Settings \u2013 Default",
+              "command": "open_file"
+            },
+            {
+              "args": {
+                "file": "${packages}/IDA/Settings/Default (Windows).sublime-settings",
+                "platform": "Windows"
+              },
+              "caption": "Settings \u2013 Default",
+              "command": "open_file"
+            },
+            {
+              "args": {
+                "file": "${packages}/User/IDA.sublime-settings"
+              },
+              "caption": "Settings \u2013 User",
+              "command": "open_file"
+            },
+            {
+              "caption": "-"
+            },
+            {
+              "args": {
+                  "file": "${packages}/IDA/Keymaps/Default (Windows).sublime-keymap",
+                  "platform": "Windows"
+              },
+              "caption": "Key Bindings \u2013 Default",
+              "command": "open_file"
+            },
+            {
+              "args": {
+                  "file": "${packages}/IDA/Keymaps/Default (OSX).sublime-keymap",
+                  "platform": "OSX"
+              },
+              "caption": "Key Bindings \u2013 Default",
+              "command": "open_file"
+            },
+            {
+              "args": {
+                "file": "${packages}/User/IDA.sublime-keymap",
+              },
+              "caption": "Key Bindings \u2013 User",
+              "command": "open_file"
             }
           ]
         }

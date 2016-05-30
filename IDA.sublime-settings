@@ -1,8 +1,0 @@
-{
-    "LP_XML_Converter":
-    {
-        "OSX": "/Applications/Graphisoft/Archicad 19/Archicad 19.app/Contents/MacOS/LP_XMLConverter.app/Contents/MacOS/LP_XMLConverter",
-        "Windows": "C:/Program Files/Graphisoft/ArchiCAD 19/LP_XMLConverter.exe"
-    },
-    "Password": null
-}

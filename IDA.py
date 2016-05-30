@@ -43,7 +43,7 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.project_name = self.project_info.get('project_base_name', None)
         self.current_object = self.project_info.get('file_path', None)
         self.settings = sublime.load_settings('IDA.sublime-settings')
-        self.lp_xml_converter = self.settings.get('LP_XML_Converter')[self.platform]
+        self.lp_xml_converter = self.settings.get('LP_XML_Converter')
         self.objects = None  # TODO try to ingest objects at __init__
         self.initiate_folders()
 

@@ -10,5 +10,51 @@
   {
     "caption": "ida: GDL Official Documentation",
     "command": "ida_gdl_docs"
+  },
+  {
+    "caption": "Preferences: IDA Settings – Default",
+    "command": "open_file",
+    "args": {
+        "file": "${packages}/IDA/Settings/Default (OSX).sublime-settings",
+        "platform": "OSX"
+    }
+  },
+  {
+    "caption": "Preferences: IDA Settings – Default",
+    "command": "open_file",
+    "args": {
+        "file": "${packages}/IDA/Settings/Default (Windows).sublime-settings",
+        "platform": "Windows"
+    }
+  },
+  {
+    "caption": "Preferences: IDA Settings – User",
+    "command": "open_file",
+    "args": {
+        "file": "${packages}/User/IDA.sublime-settings",
+    }
+  },
+  {
+    "caption": "Preferences: IDA Key Bindings – Default",
+    "command": "open_file",
+    "args": {
+      "file": "${packages}/IDA/Keymaps/Default (OSX).sublime-keymap",
+      "platform": "OSX"
+    }
+  },
+  {
+    "caption": "Preferences: IDA Key Bindings – Default",
+    "command": "open_file",
+    "args": {
+      "file": "${packages}/IDA/Keymaps/Default (Windows).sublime-keymap",
+      "platform": "Windows"
+    }
+  },
+  {
+    "caption": "Preferences: IDA Key Bindings – User",
+    "command": "open_file",
+    "args": {
+      "file": "${packages}/User/IDA.sublime-keymap",
+    }
   }
 ]
