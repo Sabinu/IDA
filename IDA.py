@@ -5,6 +5,7 @@ import os.path
 import filecmp
 import shutil
 import time
+import json
 from subprocess import Popen, PIPE
 from collections import namedtuple as nt
 import xml.etree.ElementTree as ET
@@ -34,6 +35,7 @@ def clip_path(path, folder):
 
 class IDACommand(sublime_plugin.WindowCommand):
     def __init__(self, *args):
+        ''' get all project info '''
         super().__init__(*args)
         self.project_info = self.window.extract_variables()
         self.platform = self.project_info.get('platform', None)
@@ -169,23 +171,29 @@ class IDACommand(sublime_plugin.WindowCommand):
             output = p.communicate()[0]
             output = output.decode("utf-8")[:-1]
             output = output.replace('\r', '')
+            print(60 * '+')
             print("Importing all objects from library.")
             print(output)
+            # TODO Check Import with tree
+            # TODO Asimilate objects
+        else:
+            # TODO
+            sublime.error_message('IDA Message:\nRectify LP_XML Location not implemented.')
 
 
 class IdaNewObjectCommand(IDACommand):
     def run(self):
-        sublime.error_message('IDA Message:\nFunction not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not implemented.')
 
 
 class IdaCurrentMakeCommand(IDACommand):
     def run(self):
-        sublime.error_message('IDA Message:\nFunction not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not implemented.')
 
 
 class IdaCurrentImportCommand(IDACommand):
     def run(self):
-        sublime.error_message('IDA Message:\nFunction not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not implemented.')
 
 
 class IdaAllMakeCommand(IDACommand):
@@ -230,6 +238,8 @@ class IdaAllMakeCommand(IDACommand):
 
 
 class IdaAllImportCommand(IDACommand):
+    ''' Imports All Objects from `project.LIBRARY` >> `CODE` folder
+    '''
     def run(self):
         if not self.check_project():
             return
@@ -237,7 +247,8 @@ class IdaAllImportCommand(IDACommand):
         print(60 * '+')
         print('IDA Import All')
         print(60 * '+')
-        objects = self.list_objects(self.folder_xml)
+        # TODO this is redundant, objects should already be checked and in self.objects.
+        objects = self.list_objects(self.folder_xml) # TODO Maybe this should be renamed tree_from_folder
         print(60 * '=')
         for lp in objects:
             filename = '{}/{}/{}'.format(self.folder_xml, lp.path, lp.name)
@@ -269,12 +280,12 @@ class IdaAllImportCommand(IDACommand):
 
 class IdaLibraryMakeCommand(IDACommand):
     def run(self):
-        sublime.error_message('IDA Message:\nFunction not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not implemented.')
 
 
 class IdaLibraryUnpackCommand(IDACommand):
     def run(self):
-        sublime.error_message('IDA Message:\nFunction not yet implemented.')
+        sublime.error_message('IDA Message:\nFunction not implemented.')
 
 # class IdaGdlDocsCommand(IDACommand):
 #     def run(self):
@@ -300,7 +311,7 @@ class IdaGdlDocsCommand(sublime_plugin.TextCommand):
                     print("IDA: You did not select text. Try again.")
                 else:
                     url = "http://gdl.graphisoft.com/?s=" + needle
-                    url = urllib.parse.urlparse(url).geturl()                    
+                    url = urllib.parse.urlparse(url).geturl()
                     user_message = "IDA: Performing search: '" + needle + "'"
                     print(user_message)
                     sublime.status_message(user_message)
