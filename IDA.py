@@ -2,10 +2,10 @@ import sublime
 import sublime_plugin
 
 import os.path
-import filecmp
-import shutil
-import time
-import json
+# import filecmp
+# import shutil
+# import time
+# import json
 from subprocess import Popen, PIPE
 from collections import namedtuple as nt
 import xml.etree.ElementTree as ET
@@ -42,7 +42,7 @@ class IDACommand(sublime_plugin.WindowCommand):
         self.project_path = self.project_info.get('project_path', None)
         self.project_name = self.project_info.get('project_base_name', None)
         self.current_object = self.project_info.get('file_path', None)
-        self.settings = sublime.load_settings('IDA.sublime-settings')
+        self.settings = sublime.load_settings('Default ({}).sublime-settings'.format(self.platform))
         self.lp_xml_converter = self.settings.get('LP_XML_Converter')
         self.objects = None  # TODO try to ingest objects at __init__
         self.initiate_folders()
@@ -68,6 +68,7 @@ class IDACommand(sublime_plugin.WindowCommand):
         else:
             return True
 
+    # ======================================================
     def get_lp_xml(self):
         ''' TODO
             returns the path/adress of the LP_XML Converter.
@@ -76,7 +77,6 @@ class IDACommand(sublime_plugin.WindowCommand):
             self.window.show_input_panel('Archicad Version:', '19', self.done_lp_xml, self.change_lp_xml, self.cancel_lp_xml)
         return self.lp_xml_converter
 
-    # ======================================================
     def done_lp_xml(self, ac_version):
         print('Got: {}'.format(ac_version))
 
