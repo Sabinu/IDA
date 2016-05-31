@@ -29,7 +29,7 @@ def clip_path(path, folder):
     '''
     path = path.split(os.sep)
     clip = path.index(folder)
-    output = os.sep.join(path[clip+1:])
+    output = os.sep.join(path[clip + 1:])
     return output
 
 
@@ -248,7 +248,7 @@ class IdaAllImportCommand(IDACommand):
         print('IDA Import All')
         print(60 * '+')
         # TODO this is redundant, objects should already be checked and in self.objects.
-        objects = self.list_objects(self.folder_xml) # TODO Maybe this should be renamed tree_from_folder
+        objects = self.list_objects(self.folder_xml)  # TODO Maybe this should be renamed tree_from_folder
         print(60 * '=')
         for lp in objects:
             filename = '{}/{}/{}'.format(self.folder_xml, lp.path, lp.name)
