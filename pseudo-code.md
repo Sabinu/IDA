@@ -11,7 +11,7 @@
 
 `all operations are made in .TEMP folder`
   - `backup`    - copy LCF, .library, .xml, images and CODE to `.TEMP folder`
-  - `setting`     - if LCF
+  - `setting`   - if LCF
     - True  - unpack LCF
     - False - continue
   - `operation` - un-pack tree from .TEMP/.library to .TEMP/objects.json
