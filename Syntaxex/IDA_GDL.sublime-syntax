@@ -246,7 +246,7 @@ contexts:
   - match: (`)
     push: string_backtick
 
-  - match: (?i)(?<=^|\s)((go(sub|to)|group)\s)
+  - match: (?i)(?<=^|\s)(go(sub|to)|group)(?=\s)
     scope: keyword.control.flow.gdl
     set: function_name
 
