@@ -265,8 +265,12 @@ class IdaAllImportCommand(IDACommand):
             # self.unpack_object(lp, lp_root)
             s_num = 0
             for script_name in scripts:
-                t = lp_root.find('.//' + script_name).text
-                t = t[2:-2]
+                found_script = lp_root.find('.//' + script_name)
+                if found_script is not None:
+                    t = found_script.text
+                    t = t[2:-2]
+                else:
+                    t = ''
                 if t != '':
                     s_num += 1
                     script_file = '{}/{}/{}.CODE/{}.gdl'.format(self.folder_code, lp.path, lp_name, scripts[script_name])
